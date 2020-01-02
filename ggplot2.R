@@ -1,4 +1,4 @@
-```{r}
+
 #Add Layers to plots
 library(tidyverse)
 library(dslabs)
@@ -6,37 +6,31 @@ library(dslabs)
 murders %>% ggplot(aes(population/10^6,total,label=abb)) + 
   geom_text(nudge_x = 0.075) -> p
 
-```
 
-```{r}
 #Tinkering
 p + scale_x_continuous(trans = "log10") +
   scale_y_log10() +
   xlab("Populations in millions(log scale)") +
   ylab("Total number of murders(log scale)") +
   ggtitle("US Gun Murders in US 2010") -> p
-```
 
-```{r}
+
  p + geom_point(aes(col = region),size = 3) -> p
-```
 
-```{r}
+
+
 #define average murder rate
 r <- murders %>%
     summarize(rate = sum(total) / sum(population) * 10^6) %>%
     pull(rate)
 p  + geom_abline(intercept = log10(r),lty=2,color="darkgrey") -> p
-p
-```
 
-```{r}
+
+
+
 # Themes
 library(ggthemes)
 p +theme_economist() -> p
 p
-```
-```{r}
-#Heights dataset
-```
+
 
